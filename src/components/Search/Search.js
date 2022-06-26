@@ -1,9 +1,13 @@
 import React from "react";
 
-const search = () => {
+const search = (props) => {
   return (
     <div>
-      <form id="searchform" className="searchform">
+      <form
+        id="searchform"
+        className="searchform"
+        onSubmit={props.searchRecipes}
+      >
         <input
           required
           className="form-input"

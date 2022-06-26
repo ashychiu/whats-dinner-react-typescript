@@ -12,10 +12,13 @@ const RECIPE_API_KEY = "ece4a6f9c51a3f87d1225fd520a22345";
 
 function App() {
   const [results, setResults] = useState([]);
-  const searchRecipes = async (potato) => {
+
+  const searchRecipes = async (event) => {
+    setResults([]);
+    event.preventDefault();
     await axios
       .get(
-        `${RECIPE_API_URL}?type=public&q=${potato}&app_id=${RECIPE_API_ID}&app_key=${RECIPE_API_KEY}&random=true`
+        `${RECIPE_API_URL}?type=public&q=${event.target.searchbar.value}&app_id=${RECIPE_API_ID}&app_key=${RECIPE_API_KEY}&random=true`
       )
       .then((response) => {
         // console.log(response);
@@ -24,7 +27,7 @@ function App() {
   };
 
   useEffect(() => {
-    searchRecipes();
+    // searchRecipes();
   }, []);
 
   // console.log("results", results);
@@ -33,7 +36,7 @@ function App() {
     <>
       <h1>hello world</h1>
       <Header />
-      <Search />
+      <Search searchRecipes={searchRecipes} />
       <Results results={results} />
       <Footer />
     </>
