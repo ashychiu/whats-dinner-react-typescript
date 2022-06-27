@@ -1,26 +1,29 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import "./Results.scss";
 
 const Results = (props) => {
-  const [firstRender, setFirstRender] = useState(false);
-  const results = props.results;
+  const { results, isLoading, searchTerm } = props;
+  const isFirstRender = useRef(true);
+
+  console.log(searchTerm, results);
 
   useEffect(() => {
-    setFirstRender(true);
+    isFirstRender.current = false;
   }, []);
 
-  if (firstRender)
+  if (!results.length && isFirstRender.current)
     return (
-      <section class="recipe__container">
-        <h2 class="recipe__section-title">All Food Is Good</h2>
-        <div class="how-to__container">
+      <section className="recipe__container">
+        <h2 className="recipe__section-title">All Food Is Good</h2>
+        <div className="how-to__container">
           <img
-            class="how-to__image"
+            className="how-to__image"
             src="./assets/use-what-you-have.png"
             alt="use what you have"
           />
-          <p class="how-to-use">
-            <span class="text-strong">
+          <p className="how-to-use">
+            <span className="text-strong">
               Don't ever throw out rotten food again!
             </span>{" "}
             <br />
@@ -36,8 +39,8 @@ const Results = (props) => {
             Click search again for a new selection. You can also add more
             ingredients along the results.
           </p>
-          <p class="howtouse-tab-desk">
-            <span class="text-strong">
+          <p className="howtouse-tab-desk">
+            <span className="text-strong">
               Don't ever throw away rotten food again!{" "}
             </span>
             <br />
@@ -52,19 +55,38 @@ const Results = (props) => {
         </div>
       </section>
     );
-  return (
-    <section>
-      <h2>Results</h2>
-      {results.map((recipe, index) => {
-        return (
-          <div key={index}>
-            <img src={recipe.recipe.images.REGULAR.url} alt="recipe" />
-            <p>{recipe.recipe.label}</p>
-          </div>
-        );
-      })}
-    </section>
-  );
+  if (!results.length && isLoading)
+    return (
+      <>
+        <h1>Loading</h1>
+        <div class="lds-ellipsis">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </>
+    );
+  if (!results.length && searchTerm)
+    return (
+      <h2 className="recipe__not-found">
+        Oops! There is no match. Please try again.
+      </h2>
+    );
+  else
+    return (
+      <section>
+        <h2>Showing Results for {searchTerm}</h2>
+        {results.map((recipe, index) => {
+          return (
+            <div key={index}>
+              <img src={recipe.recipe.images.REGULAR.url} alt="recipe" />
+              <p>{recipe.recipe.label}</p>
+            </div>
+          );
+        })}
+      </section>
+    );
 };
 
 export default Results;

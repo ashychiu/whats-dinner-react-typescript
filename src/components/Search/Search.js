@@ -20,6 +20,7 @@ const search = (props) => {
           SEARCH
         </button>
       </form>
+      <p className="hero__slogan">bon appetit!</p>
     </div>
   );
 };

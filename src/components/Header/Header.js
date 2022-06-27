@@ -23,7 +23,6 @@ const Header = () => {
           Recipe suggestions based on what you've in the fridge
         </p>
       </div>
-      <p className="hero__slogan">bon appetit!</p>
     </header>
   );
 };

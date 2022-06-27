@@ -12,9 +12,12 @@ const RECIPE_API_KEY = "ece4a6f9c51a3f87d1225fd520a22345";
 
 function App() {
   const [results, setResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const searchRecipes = async (event) => {
     setResults([]);
+    setIsLoading(true);
     event.preventDefault();
     await axios
       .get(
@@ -23,6 +26,8 @@ function App() {
       .then((response) => {
         // console.log(response);
         setResults(response.data.hits);
+        setIsLoading(false);
+        setSearchTerm(event.target.searchbar.value);
       });
   };
 
@@ -36,7 +41,11 @@ function App() {
     <>
       <Header />
       <Search searchRecipes={searchRecipes} />
-      <Results results={results} />
+      <Results
+        results={results}
+        isLoading={isLoading}
+        searchTerm={searchTerm}
+      />
       <Footer />
     </>
   );
