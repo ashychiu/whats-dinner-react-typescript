@@ -15,8 +15,6 @@ function App() {
   const RECIPE_API_ID = process.env.REACT_APP_RECIPE_API_ID;
   const RECIPE_API_KEY = process.env.REACT_APP_RECIPE_API_KEY;
 
-  console.log(RECIPE_API_URL);
-
   // const searchbar = document.getElementById("searchform");
   // const sticky = searchbar.offsetTop;
 
