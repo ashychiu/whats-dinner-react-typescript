@@ -1,4 +1,4 @@
-import "./App.css";
+import "./styles/global.scss";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Search from "./components/Search/Search";
@@ -34,7 +34,6 @@ function App() {
 
   return (
     <>
-      <h1>hello world</h1>
       <Header />
       <Search searchRecipes={searchRecipes} />
       <Results results={results} />
