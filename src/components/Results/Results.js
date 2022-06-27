@@ -1,12 +1,16 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
+import { Card } from "@mui/material";
 import "./Results.scss";
 
 const Results = (props) => {
   const { results, isLoading, searchTerm } = props;
   const isFirstRender = useRef(true);
+  const [showDetails, setShowDetails] = useState(null);
 
-  console.log(searchTerm, results);
+  const onHandleClick = (index) => {
+    setShowDetails(showDetails === index ? null : index);
+  };
 
   useEffect(() => {
     isFirstRender.current = false;
@@ -59,7 +63,7 @@ const Results = (props) => {
     return (
       <>
         <h1>Loading</h1>
-        <div class="lds-ellipsis">
+        <div className="lds-ellipsis">
           <div></div>
           <div></div>
           <div></div>
@@ -80,8 +84,26 @@ const Results = (props) => {
         {results.map((recipe, index) => {
           return (
             <div key={index}>
-              <img src={recipe.recipe.images.REGULAR.url} alt="recipe" />
-              <p>{recipe.recipe.label}</p>
+              <Card>
+                <img src={recipe.recipe.images.REGULAR.url} alt="recipe" />
+                <p>{recipe.recipe.label}</p>
+                <button onClick={() => onHandleClick(index)}>
+                  {showDetails === index ? "show less" : "show more"}
+                </button>
+                {showDetails === index && (
+                  <>
+                    <p>Cuisine type: {recipe.recipe.cuisineType || "N/A"}</p>
+                    <p>Meal type: {recipe.recipe.mealType || "N/A"}</p>
+                    <p>
+                      Calories: {recipe.recipe.calories?.toFixed(2) || "N/A"}
+                    </p>
+                    <p>
+                      No. of ingredients:{" "}
+                      {recipe.recipe.ingredientLines?.length || "N/A"}
+                    </p>
+                  </>
+                )}
+              </Card>
             </div>
           );
         })}
