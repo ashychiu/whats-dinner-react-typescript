@@ -1,10 +1,10 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
 import "./Results.scss";
+import whatyouhave from "../../assets/use-what-you-have.png";
 
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import LaunchIcon from "@mui/icons-material/Launch";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ImageNotSupportedIcon from "@mui/icons-material/ImageNotSupported";
 
 const Results = (props) => {
   const { results, isLoading, searchTerm } = props;
@@ -35,6 +36,12 @@ const Results = (props) => {
     }),
   }));
 
+  const imgError = (image) => {
+    image.onerror = "";
+    image.src = { ImageNotSupportedIcon };
+    return true;
+  };
+
   useEffect(() => {
     isFirstRender.current = false;
   }, []);
@@ -46,7 +53,7 @@ const Results = (props) => {
         <div className="how-to__container">
           <img
             className="how-to__image"
-            src="./assets/use-what-you-have.png"
+            src={whatyouhave}
             alt="use what you have"
           />
           <p className="how-to-use">
@@ -84,15 +91,14 @@ const Results = (props) => {
     );
   if (!results.length && isLoading)
     return (
-      <>
-        <h1>Loading</h1>
+      <section className="recipe__loading">
         <div className="lds-ellipsis">
           <div></div>
           <div></div>
           <div></div>
           <div></div>
         </div>
-      </>
+      </section>
     );
   if (!results.length && searchTerm)
     return (
@@ -107,10 +113,14 @@ const Results = (props) => {
         <div className="recipe__list">
           {results.map((recipe, index) => {
             return (
-              <Card sx={{ maxWidth: 345 }} key={index}>
+              <Card sx={{ maxWidth: 300 }} key={index}>
                 <CardMedia
+                  height="300"
                   component="img"
                   image={recipe.recipe.images.REGULAR.url}
+                  imgProps={{
+                    onError: imgError,
+                  }}
                   alt={recipe.recipe.label}
                 />
                 <CardContent>
@@ -147,7 +157,7 @@ const Results = (props) => {
                     <Typography paragraph>
                       Cuisine type: {recipe.recipe.cuisineType || "N/A"}
                     </Typography>
-                    <Typography paragraph>
+                    <Typography paragraph className="capitalize-first">
                       Meal type: {recipe.recipe.mealType || "N/A"}
                     </Typography>
                     <Typography paragraph>
