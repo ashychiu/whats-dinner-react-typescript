@@ -2,7 +2,7 @@ import React from "react";
 
 const search = (props) => {
   return (
-    <div>
+    <div class="hero__container">
       <form
         id="searchform"
         className="searchform"
