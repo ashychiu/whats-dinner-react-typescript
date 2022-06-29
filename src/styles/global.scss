@@ -71,6 +71,10 @@ a {
         font-size: 3.5rem;
       }
     }
+    &-tab-desk-2 {
+      @extend .hero__title-tab-desk;
+      font-size: 1.5rem;
+    }
   }
   &__tagline {
     font-size: 1rem;
