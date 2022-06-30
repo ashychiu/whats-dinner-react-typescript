@@ -1,6 +1,6 @@
 import React from "react";
 import "./ResultsModal.scss";
-import { Modal, Box, Typography, Button } from "@mui/material";
+import { Modal, Box, Typography } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -17,25 +17,28 @@ const style = {
 const ResultsModal = (props) => {
   if (!props.show) return null;
 
-  console.log(props);
+  const { show, recipe, close } = props;
 
   return (
     <div className="results-modal">
       <h1>recipe modal</h1>
       <Modal
-        open={props.show}
-        onClose={props.close}
+        open={show}
+        onClose={close}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+            {recipe.recipe.label}
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-          <Button onClick={props.close}>close</Button>
+          {recipe.recipe?.ingredientLines.map((ingredient) => {
+            return (
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                {ingredient}
+              </Typography>
+            );
+          })}
         </Box>
       </Modal>
     </div>

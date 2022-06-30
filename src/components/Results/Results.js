@@ -86,8 +86,8 @@ const Results = (props) => {
           {results.map((recipe, index) => {
             return (
               <Box key={index} mb={3}>
-                <CardActionArea onClick={() => handleModalClick(recipe)}>
-                  <Card sx={{ maxWidth: 300 }}>
+                <Card sx={{ maxWidth: 300 }}>
+                  <CardActionArea onClick={() => handleModalClick(recipe)}>
                     <CardMedia
                       height="300"
                       component="img"
@@ -102,51 +102,50 @@ const Results = (props) => {
                         {recipe.recipe.label}
                       </Typography>
                     </CardContent>
-                    <CardActions disableSpacing>
-                      <IconButton aria-label="add to favorites">
-                        <FavoriteIcon />
-                      </IconButton>
-                      <IconButton
-                        href={recipe.recipe.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <LaunchIcon />
-                      </IconButton>
-                      <ExpandMore
-                        expand={showDetails === index}
-                        onClick={() => handleExpandClick(index)}
-                        aria-expanded={showDetails === index}
-                        aria-label="show more"
-                      >
-                        <ExpandMoreIcon />
-                      </ExpandMore>
-                    </CardActions>
-                    <Collapse
-                      in={showDetails === index}
-                      timeout="auto"
-                      unmountOnExit
+                  </CardActionArea>
+                  <CardActions disableSpacing>
+                    <IconButton aria-label="add to favorites">
+                      <FavoriteIcon />
+                    </IconButton>
+                    <IconButton
+                      href={recipe.recipe.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      <CardContent>
-                        <Typography paragraph>{recipe.recipe.label}</Typography>
-                        <Typography paragraph>
-                          Cuisine type: {recipe.recipe.cuisineType || "N/A"}
-                        </Typography>
-                        <Typography paragraph className="capitalize-first">
-                          Meal type: {recipe.recipe.mealType || "N/A"}
-                        </Typography>
-                        <Typography paragraph>
-                          Calories:{" "}
-                          {`${recipe.recipe.calories?.toFixed(2)} kcal` ||
-                            "N/A"}
-                        </Typography>
-                        <Typography paragraph>
-                          Cautions: {recipe.recipe.cautions || "N/A"}
-                        </Typography>
-                      </CardContent>
-                    </Collapse>
-                  </Card>
-                </CardActionArea>
+                      <LaunchIcon />
+                    </IconButton>
+                    <ExpandMore
+                      expand={showDetails === index}
+                      onClick={() => handleExpandClick(index)}
+                      aria-expanded={showDetails === index}
+                      aria-label="show more"
+                    >
+                      <ExpandMoreIcon />
+                    </ExpandMore>
+                  </CardActions>
+                  <Collapse
+                    in={showDetails === index}
+                    timeout="auto"
+                    unmountOnExit
+                  >
+                    <CardContent>
+                      <Typography paragraph>{recipe.recipe.label}</Typography>
+                      <Typography paragraph>
+                        Cuisine type: {recipe.recipe.cuisineType || "N/A"}
+                      </Typography>
+                      <Typography paragraph className="capitalize-first">
+                        Meal type: {recipe.recipe.mealType || "N/A"}
+                      </Typography>
+                      <Typography paragraph>
+                        Calories:{" "}
+                        {`${recipe.recipe.calories?.toFixed(2)} kcal` || "N/A"}
+                      </Typography>
+                      <Typography paragraph>
+                        Cautions: {recipe.recipe.cautions || "N/A"}
+                      </Typography>
+                    </CardContent>
+                  </Collapse>
+                </Card>
               </Box>
             );
           })}
