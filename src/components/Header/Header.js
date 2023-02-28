@@ -1,10 +1,16 @@
 import React from "react";
+import { useTheme } from "../../App";
 import heroImage from "../../assets/hero-image.jpg";
 
 const Header = () => {
+  const theme = useTheme();
+
   return (
     <header>
-      <div class="hero__container">
+      <div
+        class="hero__container"
+        style={{ backgroundColor: theme.backgroundColor, color: theme.color }}
+      >
         <img className="hero__image" src={heroImage} alt="food dishes banner" />
         <p className="hero__heading">We build dinner together.</p>
         <a href="./index.html">

@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import { themeContext } from "../../App";
 import food from "../../assets/bouncing-food.png";
 
 const Home = () => {
+  const darkTheme = useContext(themeContext);
+  const themeStyles = {
+    backgroundColor: darkTheme ? "#333" : "#fff",
+    color: darkTheme ? "#fff" : "#000",
+  };
+
   return (
-    <section className="recipe__container">
+    <section className="recipe__container" style={themeStyles}>
       <h2 className="recipe__section-title">All Food Is Good</h2>
       <div className="how-to__container">
         <img className="how-to__image" src={food} alt="use what you have" />

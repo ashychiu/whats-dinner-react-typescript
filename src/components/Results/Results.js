@@ -1,8 +1,10 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
+
 import "./Results.scss";
 import Home from "../Home/Home";
 import ResultsModal from "../ResultsModal/ResultsModal";
+import { themeContext } from "../../App";
 
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
@@ -25,6 +27,12 @@ const Results = (props) => {
   const [showDetails, setShowDetails] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [recipe, setRecipe] = useState();
+  const darkTheme = useContext(themeContext);
+
+  const themeStyles = {
+    backgroundColor: darkTheme ? "#333" : "#fff",
+    color: darkTheme ? "#fff" : "#000",
+  };
 
   const handleModalClick = (recipe) => {
     setShowModal(true);
@@ -61,7 +69,10 @@ const Results = (props) => {
   if (isFirstRender.current) return <Home />;
   if (!results.length && isLoading)
     return (
-      <section className="recipe__loading recipe__container">
+      <section
+        className="recipe__loading recipe__container"
+        style={themeStyles}
+      >
         <div className="lds-ellipsis">
           <div></div>
           <div></div>
@@ -72,7 +83,10 @@ const Results = (props) => {
     );
   if (!results.length && searchTerm)
     return (
-      <section className="recipe__loading recipe__container">
+      <section
+        className="recipe__loading recipe__container"
+        style={themeStyles}
+      >
         <h2 className="recipe__not-found">
           Oops! There is no match. Please try again.
         </h2>
@@ -80,7 +94,7 @@ const Results = (props) => {
     );
   else
     return (
-      <section class="recipe__container">
+      <section class="recipe__container" style={themeStyles}>
         <h2>Showing results for {searchTerm}</h2>
         <div className="recipe__list">
           {results.map((recipe, index) => {

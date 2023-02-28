@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { themeContext } from "../../App";
 
-const search = (props) => {
+const Search = (props) => {
+  const darkTheme = useContext(themeContext);
+  const themeStyles = {
+    backgroundColor: darkTheme ? "#333" : "#fff",
+    color: darkTheme ? "#fff" : "#000",
+  };
+
   return (
-    <div class="hero__container">
+    <div class="hero__container" style={themeStyles}>
       <form
         id="searchform"
         className="searchform"
@@ -25,4 +32,4 @@ const search = (props) => {
   );
 };
 
-export default search;
+export default Search;

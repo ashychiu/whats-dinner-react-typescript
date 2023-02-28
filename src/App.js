@@ -1,15 +1,26 @@
-import "./styles/global.scss";
+import React from "react";
+import { useState, useContext, createContext } from "react";
+import axios from "axios";
+
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Search from "./components/Search/Search";
 import Results from "./components/Results/Results";
-import axios from "axios";
-import { useState } from "react";
+
+import "./styles/global.scss";
+
+export const themeContext = createContext();
+
+export function useTheme() {
+  const theme = useContext(themeContext);
+  return theme;
+}
 
 function App() {
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [theme, setTheme] = useState("light");
 
   const RECIPE_API_URL = process.env.REACT_APP_RECIPE_API_URL;
   const RECIPE_API_ID = process.env.REACT_APP_RECIPE_API_ID;
@@ -27,9 +38,9 @@ function App() {
   // };
 
   const searchRecipes = async (event) => {
+    event.preventDefault();
     setResults([]);
     setIsLoading(true);
-    event.preventDefault();
     await axios
       .get(
         `${RECIPE_API_URL}?type=public&q=${event.target.searchbar.value}&app_id=${RECIPE_API_ID}&app_key=${RECIPE_API_KEY}&random=true`
@@ -41,16 +52,40 @@ function App() {
       });
   };
 
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    console.log("setTheme", newTheme);
+  };
+
+  const darkTheme = {
+    backgroundColor: "#2c3e50",
+    color: "#fff",
+  };
+
+  const lightTheme = {
+    backgroundColor: "#fff",
+    color: "#000",
+  };
+
+  const themeContextValue = theme === "dark" ? darkTheme : lightTheme;
+
   return (
     <>
-      <Header />
-      <Search searchRecipes={searchRecipes} />
-      <Results
-        results={results}
-        isLoading={isLoading}
-        searchTerm={searchTerm}
-      />
-      <Footer />
+      <themeContext.Provider value={themeContextValue}>
+        <div className="app">
+          <button onClick={toggleTheme}>toggle theme</button>
+          <Header />
+          <Search searchRecipes={searchRecipes} />
+          <Results
+            results={results}
+            isLoading={isLoading}
+            searchTerm={searchTerm}
+          />
+          <Footer />
+        </div>
+      </themeContext.Provider>
     </>
   );
 }
