@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useContext } from "react";
 import "./Results.scss";
 import Home from "../Home/Home";
 import ResultsModal from "../ResultsModal/ResultsModal";
-import { themeContext } from "../../App";
+import { useTheme } from "../../App";
 
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
@@ -27,11 +27,11 @@ const Results = (props) => {
   const [showDetails, setShowDetails] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [recipe, setRecipe] = useState();
-  const darkTheme = useContext(themeContext);
+  const theme = useTheme();
 
   const themeStyles = {
-    backgroundColor: darkTheme ? "#333" : "#fff",
-    color: darkTheme ? "#fff" : "#000",
+    backgroundColor: theme.backgroundColor,
+    color: theme.color,
   };
 
   const handleModalClick = (recipe) => {
@@ -94,7 +94,7 @@ const Results = (props) => {
     );
   else
     return (
-      <section class="recipe__container" style={themeStyles}>
+      <section className="recipe__container" style={themeStyles}>
         <h2>Showing results for {searchTerm}</h2>
         <div className="recipe__list">
           {results.map((recipe, index) => {

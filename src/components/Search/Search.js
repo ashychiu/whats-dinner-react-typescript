@@ -1,15 +1,14 @@
 import React, { useContext } from "react";
-import { themeContext } from "../../App";
+import { useTheme } from "../../App";
 
 const Search = (props) => {
-  const darkTheme = useContext(themeContext);
-  const themeStyles = {
-    backgroundColor: darkTheme ? "#333" : "#fff",
-    color: darkTheme ? "#fff" : "#000",
-  };
+  const theme = useTheme();
 
   return (
-    <div className="hero__container" style={themeStyles}>
+    <div
+      className="hero__container"
+      style={{ backgroundColor: theme.backgroundColor, color: theme.color }}
+    >
       <form
         id="searchform"
         className="searchform"

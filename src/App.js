@@ -16,6 +16,13 @@ export function useTheme() {
   return theme;
 }
 
+export const themeStyles = (theme) => {
+  return {
+    backgroundColor: theme.backgroundColor,
+    color: theme.color,
+  };
+};
+
 function App() {
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

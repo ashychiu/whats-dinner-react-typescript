@@ -1,10 +1,13 @@
 import React from "react";
+import { useTheme, themeStyles } from "../../App";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { IconButton } from "@mui/material";
 
 const Footer = () => {
+  const theme = useTheme();
+
   return (
-    <footer className="footer">
+    <footer className="footer" style={themeStyles(theme)}>
       <div className="footer__container">
         <a
           className="footer__author-link"
