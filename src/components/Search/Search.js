@@ -9,7 +9,7 @@ const Search = (props) => {
   };
 
   return (
-    <div class="hero__container" style={themeStyles}>
+    <div className="hero__container" style={themeStyles}>
       <form
         id="searchform"
         className="searchform"

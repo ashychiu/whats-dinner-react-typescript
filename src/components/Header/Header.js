@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <header>
       <div
-        class="hero__container"
+        className="hero__container"
         style={{ backgroundColor: theme.backgroundColor, color: theme.color }}
       >
         <img className="hero__image" src={heroImage} alt="food dishes banner" />

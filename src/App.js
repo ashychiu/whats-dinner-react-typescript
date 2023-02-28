@@ -75,7 +75,9 @@ function App() {
     <>
       <themeContext.Provider value={themeContextValue}>
         <div className="app">
-          <button onClick={toggleTheme}>toggle theme</button>
+          <button onClick={toggleTheme}>
+            {theme === "light" ? "Switch off 💡" : "Switch on 💡"}
+          </button>
           <Header />
           <Search searchRecipes={searchRecipes} />
           <Results
