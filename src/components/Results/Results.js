@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect, useRef, useContext } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import "./Results.scss";
 import Home from "../Home/Home";

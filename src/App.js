@@ -8,6 +8,7 @@ import Search from "./components/Search/Search";
 import Results from "./components/Results/Results";
 
 import "./styles/global.scss";
+import { FormControlLabel, FormGroup, Switch } from "@mui/material";
 
 export const themeContext = createContext();
 
@@ -82,9 +83,12 @@ function App() {
     <>
       <themeContext.Provider value={themeContextValue}>
         <div className="app">
-          <button onClick={toggleTheme}>
-            {theme === "light" ? "Switch off 💡" : "Switch on 💡"}
-          </button>
+          <FormGroup style={{ position: "fixed", right: 0 }}>
+            <FormControlLabel
+              control={<Switch onClick={toggleTheme} />}
+              label="Dark Mode"
+            />
+          </FormGroup>
           <Header />
           <Search searchRecipes={searchRecipes} />
           <Results
