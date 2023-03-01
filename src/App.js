@@ -8,6 +8,7 @@ import Search from "./components/Search/Search";
 import Results from "./components/Results/Results";
 
 import "./styles/global.scss";
+import { darkTheme, lightTheme } from "./utils/Theme";
 import { FormControlLabel, FormGroup, Switch } from "@mui/material";
 
 export const themeContext = createContext();
@@ -65,16 +66,6 @@ function App() {
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
     console.log("setTheme", newTheme);
-  };
-
-  const darkTheme = {
-    backgroundColor: "#2c3e50",
-    color: "#fff",
-  };
-
-  const lightTheme = {
-    backgroundColor: "#fff",
-    color: "#000",
   };
 
   const themeContextValue = theme === "dark" ? darkTheme : lightTheme;

@@ -44,7 +44,7 @@ button.dark {
   --color: #fff;
 }
 
-header {
+.how-to-use {
   background-color: var(--background-color);
   color: var(--color);
 }

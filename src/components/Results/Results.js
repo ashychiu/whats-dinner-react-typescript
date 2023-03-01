@@ -66,7 +66,7 @@ const Results = (props) => {
     isFirstRender.current = false;
   }, []);
 
-  if (isFirstRender.current) return <Home />;
+  if (!results.length && !isLoading) return <Home />;
   if (!results.length && isLoading)
     return (
       <section
