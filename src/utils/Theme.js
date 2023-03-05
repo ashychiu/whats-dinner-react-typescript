@@ -14,4 +14,14 @@ export const themeStyles = (theme) => ({
   backgroundColor: theme.backgroundColor,
   color: theme.color,
   fontFamily: theme.fontFamily,
+  h1: {
+    color: theme.color,
+  },
+  h2: {
+    color: theme.color,
+  },
+  p: {
+    color: theme.color,
+    fontSize: "2rem",
+  },
 });

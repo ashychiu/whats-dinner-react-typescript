@@ -16,15 +16,10 @@ const Home = () => {
           <span className="text-strong">
             Don't ever throw out rotten food again!
           </span>{" "}
-          <br />
-          Use every ingredient you have (to get rid of...)
-          <br />
-          <br />
-          Enter ingredient names in the search, recipe suggestions will be
-          shown.
-          <br />
-          <br />
-          Didn't see anything you like? <br />
+          <br /> <br />
+          Use every ingredient you have (to get rid of...) Enter ingredient
+          names in the search, recipe suggestions will be shown. Didn't see
+          anything you like? <br />
           <br />
           Click search again for a new selection. You can also add more
           ingredients along the results.
