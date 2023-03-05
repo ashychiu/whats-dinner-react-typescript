@@ -6,7 +6,7 @@ import food from "../../assets/bouncing-food.png";
 const Home = () => {
   const theme = useTheme();
   const styles = themeStyles(theme);
-  console.log(styles);
+
   return (
     <section className="recipe__container" style={styles}>
       <h2 className="recipe__section-title">All Food Is Good</h2>
