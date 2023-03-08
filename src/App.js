@@ -2,9 +2,9 @@ import React from "react";
 import { useState, useContext, createContext } from "react";
 import axios from "axios";
 
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import Search from "./components/Search/Search";
+import Header from "./components/Header/Header.tsx";
+import Footer from "./components/Footer/Footer.tsx";
+import Search from "./components/Search/Search.tsx";
 import Results from "./components/Results/Results";
 
 import "./styles/global.scss";

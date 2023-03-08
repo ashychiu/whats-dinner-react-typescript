@@ -7,19 +7,31 @@ import ResultsModal from "../ResultsModal/ResultsModal";
 import { useTheme } from "../../App";
 
 import { styled } from "@mui/material/styles";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import LaunchIcon from "@mui/icons-material/Launch";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ImageNotSupportedIcon from "@mui/icons-material/ImageNotSupported";
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
+  CardActionArea,
+  Collapse,
+  IconButton,
+  Typography,
+} from "@mui/material";
+
+import {
+  Launch as LaunchIcon,
+  Favorite as FavoriteIcon,
+  ExpandMore as ExpandMoreIcon,
+  ImageNotSupported as ImageNotSupportedIcon,
+} from "@mui/icons-material";
+
 import { Box } from "@mui/system";
-import { CardActionArea } from "@mui/material";
+
+// export interface IResultsProps {
+//   results: [];
+//   isLoading: boolean;
+//   searchTerm: string;
+// }
 
 const Results = (props) => {
   const { results, isLoading, searchTerm } = props;
@@ -41,7 +53,7 @@ const Results = (props) => {
 
   const handleModalClose = () => setShowModal(false);
 
-  const handleExpandClick = (index) => {
+  const handleExpandClick = (index: number) => {
     setShowDetails(showDetails === index ? null : index);
   };
 
@@ -73,7 +85,7 @@ const Results = (props) => {
         className="recipe__loading recipe__container"
         style={themeStyles}
       >
-        <div className="lds-ellipsis">
+        <div className="lds-ellipsis" data-testid="isLoading">
           <div></div>
           <div></div>
           <div></div>

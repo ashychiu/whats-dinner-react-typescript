@@ -17,12 +17,7 @@ const Footer = () => {
         >
           <p className="footer__author">
             Created by Ashley Chiu © 2022
-            <IconButton
-              aria-label="github"
-              color="inherit"
-              disableElevation
-              disableRipple
-            >
+            <IconButton aria-label="github" color="inherit" disableRipple>
               <GitHubIcon fontSize="medium" color="inherit" />
             </IconButton>
           </p>
