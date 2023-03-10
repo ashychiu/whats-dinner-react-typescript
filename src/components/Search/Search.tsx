@@ -1,7 +1,12 @@
 import React from "react";
 import { useTheme } from "../../App";
 
-const Search = (props) => {
+export interface ISearchProps {
+  searchRecipes: (event: React.FormEvent<HTMLFormElement>) => void;
+}
+const Search = (props: ISearchProps) => {
+  const { searchRecipes } = props;
+
   const theme = useTheme();
 
   return (
@@ -9,11 +14,7 @@ const Search = (props) => {
       className="hero__container"
       style={{ backgroundColor: theme.backgroundColor, color: theme.color }}
     >
-      <form
-        id="searchform"
-        className="searchform"
-        onSubmit={props.searchRecipes}
-      >
+      <form id="searchform" className="searchform" onSubmit={searchRecipes}>
         <input
           required
           className="form-input"
