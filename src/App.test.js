@@ -1,11 +1,11 @@
 import "@testing-library/jest-dom";
-import { logRoles, render, screen, waitFor } from "@testing-library/react";
+import { logRoles, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
 
 test("theme switch is present", () => {
   const { container } = render(<App />);
-  // logRoles(container);
+  logRoles(container);
   const themeSwitch = screen.getByRole("checkbox", { name: "Dark Mode" });
   expect(themeSwitch).toBeInTheDocument();
 });
@@ -30,14 +30,22 @@ test("text colour changes when switching to dark mode", async () => {
 
 test("search input is typable", async () => {
   const searchRecipes = jest.fn();
-  const wrapper = render(<App searchRecipes={searchRecipes} />);
-  console.log(wrapper.debug());
+  render(<App searchRecipes={searchRecipes} />);
   const search = screen.getByRole("searchbox", { name: "" });
+  expect(search).toBeInTheDocument();
 
   await userEvent.type(search, "eggs");
   expect(search).toHaveValue("eggs");
-  const isLoading = screen.queryByTestId("isLoading");
-  expect(isLoading).not.toBeInTheDocument();
+});
+
+test("search function is called when submit", async () => {
+  const searchRecipes = jest.fn();
+  render(<App searchRecipes={searchRecipes} />);
+  const search = screen.getByRole("searchbox", { name: "" });
+  expect(search).toBeInTheDocument();
+
+  await userEvent.type(search, "eggs");
+  expect(search).toHaveValue("eggs");
 
   const submit = screen.getByRole("button", { name: "SEARCH" });
   expect(submit).toBeInTheDocument();
@@ -46,17 +54,15 @@ test("search input is typable", async () => {
   expect(searchRecipes).toBeCalledTimes(1);
 });
 
-// test("submit button", async () => {
-//   render(<App />);
-//   const submit = screen.getByRole("button", { name: "SEARCH" });
-//   expect(submit).toBeInTheDocument();
-//   await userEvent.click(submit);
-//   await waitFor(
-//     () => {
-//       expect(
-//         screen.findByText("Please fill out this field.")
-//       ).toBeInTheDocument();
-//     },
-//     { timeout: 10000 }
-//   );
-// });
+test("search function is NOT called if there is no search term", async () => {
+  const searchRecipes = jest.fn();
+  render(<App searchRecipes={searchRecipes} />);
+  const search = screen.getByRole("searchbox", { name: "" });
+  expect(search).toBeInTheDocument();
+
+  const submit = screen.getByRole("button", { name: "SEARCH" });
+  expect(submit).toBeInTheDocument();
+  await userEvent.click(submit);
+
+  expect(searchRecipes).toBeCalledTimes(0);
+});

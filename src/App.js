@@ -65,7 +65,6 @@ function App() {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
-    console.log("setTheme", newTheme);
   };
 
   const themeContextValue = theme === "dark" ? darkTheme : lightTheme;
@@ -76,7 +75,7 @@ function App() {
         <div className="app">
           <FormGroup style={{ position: "fixed", right: 0 }}>
             <FormControlLabel
-              control={<Switch onClick={toggleTheme} />}
+              control={<Switch onClick={toggleTheme} color="warning" />}
               label="Dark Mode"
             />
           </FormGroup>
