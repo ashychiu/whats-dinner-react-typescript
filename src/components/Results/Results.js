@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 
 import "./Results.scss";
-import Home from "../Home/Home";
+import Home from "../Home/Home.tsx";
 import ResultsModal from "../ResultsModal/ResultsModal";
 import { useTheme } from "../../App";
 
