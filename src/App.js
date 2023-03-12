@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useContext, createContext } from "react";
+import { useState, useEffect, useContext, createContext } from "react";
 import axios from "axios";
 
 import Header from "./components/Header/Header.tsx";
@@ -46,6 +46,22 @@ function App() {
   //   }
   // };
 
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const searchbar = document.getElementById("searchform");
+      const sticky = searchbar.offsetTop;
+      setIsSticky(window.pageYOffset >= sticky + 600);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const searchRecipes = async (event) => {
     event.preventDefault();
     setResults([]);
@@ -80,7 +96,7 @@ function App() {
             />
           </FormGroup>
           <Header />
-          <Search searchRecipes={searchRecipes} />
+          <Search searchRecipes={searchRecipes} isSticky={isSticky} />
           <Results
             results={results}
             isLoading={isLoading}

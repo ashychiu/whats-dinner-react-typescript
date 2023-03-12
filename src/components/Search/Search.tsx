@@ -3,11 +3,14 @@ import { useTheme } from "../../App";
 
 export interface ISearchProps {
   searchRecipes: (event: React.FormEvent<HTMLFormElement>) => void;
+  isSticky: boolean;
 }
 const Search = (props: ISearchProps) => {
-  const { searchRecipes } = props;
+  const { searchRecipes, isSticky } = props;
 
   const theme = useTheme();
+
+  const searchbarClasses = "searchbar" + (isSticky ? " sticky" : null);
 
   return (
     <div
@@ -17,7 +20,7 @@ const Search = (props: ISearchProps) => {
       <form id="searchform" className="searchform" onSubmit={searchRecipes}>
         <input
           required
-          className="form-input"
+          className={`form-input ${searchbarClasses}`}
           type="search"
           id="searchbar"
           name="searchbar"
