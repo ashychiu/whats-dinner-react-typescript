@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 
 import "./Results.scss";
 import Home from "../Home/Home.tsx";
-import ResultsModal from "../ResultsModal/ResultsModal";
+import ResultsModal from "../ResultsModal/ResultsModal.tsx";
 import { useTheme } from "../../App";
 
 import { styled } from "@mui/material/styles";

@@ -21,7 +21,17 @@ const style = {
   },
 };
 
-const ResultsModal = (props) => {
+export interface IResultsModalProps {
+  show: boolean;
+  recipe: {
+    recipe: {
+      label: "";
+      ingredientLines: [];
+    };
+  };
+  close: () => void;
+}
+const ResultsModal = (props: IResultsModalProps) => {
   if (!props.show) return null;
 
   const { show, recipe, close } = props;
