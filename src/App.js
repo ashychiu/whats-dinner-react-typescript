@@ -71,6 +71,7 @@ function App() {
         `${RECIPE_API_URL}?type=public&q=${event.target.searchbar.value}&app_id=${RECIPE_API_ID}&app_key=${RECIPE_API_KEY}&random=true`
       )
       .then((response) => {
+        console.log("response", response.data.hits);
         setResults(response.data.hits);
         setIsLoading(false);
         setSearchTerm(event.target.searchbar.value);
